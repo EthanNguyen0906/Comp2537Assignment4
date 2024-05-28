@@ -1,3 +1,7 @@
+* {
+    font-size: 16pt;
+}
+
 #card-container {
     display: flex;
     flex-wrap: wrap;
@@ -5,15 +9,14 @@
 }
 
 .pokemon-card {
-    flex-basis: 33.3%;
     position: relative;
-
     transition-duration: 1s;
     transition-property: transform;
     transform-style: preserve-3d;
 }
 
 .flip {
+    transition-duration: 1s;
     transform: rotateY(180deg);
 }
 
@@ -38,4 +41,37 @@ img {
 
 li {
     visibility: hidden;
+    list-style: none;
+}
+
+body.light-theme .btn:not(.static-theme) {
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+
+body.dark-theme .btn:not(.static-theme) {
+    color: white;
+    background-color: black;
+    border-color: white;
+}
+
+body.light-theme .btn-check:checked+.btn:not(.static-theme) {
+    background-color: lightgray;
+    border-color: gray;
+}
+
+body.dark-theme .btn-check:checked+.btn:not(.static-theme) {
+    background-color: darkgray;
+    border-color: lightgray;
+}
+
+body.light-theme {
+    background-color: white;
+    color: black;
+}
+
+body.dark-theme {
+    background-color: black;
+    color: white;
 }
