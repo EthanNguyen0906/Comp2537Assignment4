@@ -1,15 +1,15 @@
 let difficulty = "Easy";
-let totalPairs = 6;
+let totalPairs = 3;
 let matches = 0;
 let clicks = 0;
 let timeLimit = 30;
 let timerInterval;
 let flexInt = 33;
 
-document.getElementById("easybtn").addEventListener("click", () => { setDifficulty("Easy", 6, 30, 33); });
-document.getElementById("mediumbtn").addEventListener("click", () => { setDifficulty("Medium", 12, 60, 15); });
-document.getElementById("hardbtn").addEventListener("click", () => { setDifficulty("Hard", 24, 120, 12); });
-document.getElementById("expertbtn").addEventListener("click", () => { setDifficulty("Expert", 48, 300, 8); });
+document.getElementById("easybtn").addEventListener("click", () => { setDifficulty("Easy", 3, 30, 33); });
+document.getElementById("mediumbtn").addEventListener("click", () => { setDifficulty("Medium", 6, 60, 15); });
+document.getElementById("hardbtn").addEventListener("click", () => { setDifficulty("Hard", 12, 120, 12); });
+document.getElementById("expertbtn").addEventListener("click", () => { setDifficulty("Expert", 24, 300, 8); });
 
 document.getElementById("lightbtn").addEventListener("click", () => { setTheme("light"); });
 document.getElementById("darkbtn").addEventListener("click", () => { setTheme("dark"); });
@@ -67,7 +67,7 @@ function updateStats() {
         stat.style.visibility = "visible";
     });
     document.querySelector("#stats_container li:nth-child(1)").textContent = `Number of Pairs: ${totalPairs}`;
-    document.querySelector("#stats_container li:nth-child(2)").textContent = `Number of Pairs Left: ${totalPairs / 2 - matches}`;
+    document.querySelector("#stats_container li:nth-child(2)").textContent = `Number of Pairs Left: ${totalPairs - matches}`;
     document.querySelector("#stats_container li:nth-child(3)").textContent = `Number of Matches: ${matches}`;
     document.querySelector("#stats_container li:nth-child(4)").textContent = `Number of Clicks: ${clicks}`;
     document.querySelector("#stats_container li:nth-child(5)").textContent = `You have ${timeLimit} seconds!`;
@@ -86,7 +86,7 @@ async function generateCards(numberOfCards) {
     const count = await getPokemonCount();
     const promises = [];
 
-    for (let i = 0; i < numberOfCards / 2; i++) {
+    for (let i = 0; i < numberOfCards; i++) {
         const randomId = Math.floor(Math.random() * count) + 1;
         for (let j = 0; j < 2; j++) {
             promises.push(fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`).then(response => response.json()));
@@ -160,7 +160,7 @@ function resetBoard() {
 }
 
 function checkWin() {
-    if (matches === totalPairs / 2) {
+    if (matches === totalPairs) {
         alert("You win!");
         clearInterval(timerInterval);
     }
